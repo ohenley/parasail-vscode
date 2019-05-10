@@ -1,0 +1,44 @@
+{
+	"name": "ParaSail",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"icon": "logo_parasail.png",
+	"version": "0.9.0",
+	"publisher": "ohenley",
+	"author": "ohenley",
+	"engines": { "vscode": "*" },
+    "galleryBanner": {
+        "color": "#AAAAAA",
+        "theme": "dark"
+    },
+    "preview": true,
+    "keywords": [
+        "parasail",
+        "ParaSail"
+    ],
+    "license": "LICENSE",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ohenley/parasail-vscode"
+    },
+    "bugs": {
+        "url": "https://github.com/ohenley/parasail-vscode/issues",
+        "email": "olivier.henley@gmail.com"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+	"contributes": {
+		"languages": [{
+			"id": "parasail",
+			"extensions": [ ".psl", ".psi"],
+			"aliases": [ "ParaSail", "parasail" ],
+			"configuration": "./language-configuration.json"
+		}],
+		"grammars": [{
+			"language": "parasail",
+			"scopeName": "source.parasail",
+			"path": "./syntaxes/parasail.tmLanguage.json"
+		}]
+	}
+}
