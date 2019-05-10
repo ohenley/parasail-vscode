@@ -1,5 +1,5 @@
 
 # ParaSail for VSC
 
-![screenshot](ss.png)
+![screenshot](screenshot/ss.png)
 
