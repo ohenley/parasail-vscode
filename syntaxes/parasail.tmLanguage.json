@@ -1,242 +1,232 @@
 {
-	"name": "parasail",
-	"comment": "parasail grammar file",
-	"scopeName": "source.parasail",
-	"fileTypes": [
-		"psl"
-	],
-	"patterns": [
-		{
-			"include": "#function-name"
-		},
-		{
-			"include": "#comments"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#punctuation"
-		},
-		{
-			"include": "#constants-and-special-vars"
-		}
-		
-	],
-	"repository": {
-		"function-name": {
-			"patterns": [
-				{
-					"match": "(func)\\s(\\w+)",
-					"captures": {
-						"1" : {
-							"name": "keyword.declaration.parasail"
-						},
-						"2" : {
-							"name": "entity.name.function.parasail"
-						}
-					}
-				}
-			]
-		},
-		"comments": {
-			"patterns": [
-				{
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash.parasail"
-						}
-					},
-					"match": "((//).*)$"
-				},
-				{
-                                        "name": "comment.line.parasail",
-                                        "begin": "--",
-                                        "end": "[\\n\\r]",
-                                }
-			]
-		},
-		"string-interp": {
-			"patterns": [
-				{
-					"captures": {
-						"2": {
-							"name": "variable.parameter.parasail"
-						},
-						"3": {
-							"name": "variable.parameter.parasail"
-						}
-					},
-					"match": "\\$((\\w+)|\\{([^{}]+)\\})"
-				},
-				{
-					"match": "\\\\.",
-					"name": "constant.character.escape.parasail"
-				}
-			]
-		},
-		"strings": {
-			"patterns": [
-				{
-					"begin": "(?<!r)\"\"\"",
-					"end": "\"\"\"(?!\")",
-					"name": "string.interpolated.triple.double.parasail",
-					"patterns": [
-						{
-							"include": "#string-interp"
-						}
-					]
-				},
-				{
-					"begin": "(?<!r)'''",
-					"end": "'''(?!')",
-					"name": "string.interpolated.triple.single.parasail",
-					"patterns": [
-						{
-							"include": "#string-interp"
-						}
-					]
-				},
-				{
-					"begin": "r\"\"\"",
-					"end": "\"\"\"(?!\")",
-					"name": "string.quoted.triple.double.parasail"
-				},
-				{
-					"begin": "r'''",
-					"end": "'''(?!')",
-					"name": "string.quoted.triple.single.parasail"
-				},
-				{
-					"begin": "(?<!\\|r)\"",
-					"end": "\"",
-					"name": "string.interpolated.double.parasail",
-					"patterns": [
-						{
-							"match": "\\n",
-							"name": "invalid.string.newline"
-						},
-						{
-							"include": "#string-interp"
-						}
-					]
-				},
-				{
-					"begin": "r\"",
-					"end": "\"",
-					"name": "string.quoted.double.parasail",
-					"patterns": [
-						{
-							"match": "\\n",
-							"name": "invalid.string.newline"
-						}
-					]
-				},
-				{
-					"begin": "(?<!\\|r)'",
-					"end": "'",
-					"name": "string.interpolated.single.parasail",
-					"patterns": [
-						{
-							"match": "\\n",
-							"name": "invalid.string.newline"
-						},
-						{
-							"include": "#string-interp"
-						}
-					]
-				},
-				{
-					"begin": "r'",
-					"end": "'",
-					"name": "string.quoted.single.parasail",
-					"patterns": [
-						{
-							"match": "\\n",
-							"name": "invalid.string.newline"
-						}
-					]
-				}
-			]
-		},
-		"keywords": {
-			"patterns": [
-				{
-					"match": "(?<!\\$)\\b(all|block|case|continue|each|else|elsif|exit|for|forward|if|loop|return|reverse|some|then|until|while|with)\\b(?!\\$)",
-					"name": "keyword.control.parasail"
-				},
-				{
-					"match": "(?<!\\$)\\b(abstract|class|concurrent|end|extends|exports|func|global|implements|import|interface|lambda|locked|new|of|op|optional|private|queued|separate|type|var)\\b(?!\\$)",
-					"name": "keyword.declaration.parasail"
-				},
-				{
-					"match": "(==|!=|<=?|>=?)",
-					"name": "keyword.operator.comparison.parasail"
-				},
-				{
-					"match": "(([+*/%-]|\\~)=)",
-					"name": "keyword.operator.assignment.arithmetic.parasail"
-				},
-				{
-					"match": "(<=>|<==|==>|:=|<=|>=|<\\|=|\\|=|==)",
-					"name": "keyword.operator.assignment.parasail"
-				},
-				{
-					"match": "(\\-\\-|\\+\\+)",
-					"name": "keyword.operator.increment-decrement.parasail"
-				},
-				{
-					"match": "(\\-|\\+|\\*|\\/|\\~\\/|%)",
-					"name": "keyword.operator.arithmetic.parasail"
-				},
-				{
-					"match": "(!|&&|\\|\\|)",
-					"name": "keyword.operator.logical.parasail"
-				},
-				{
-					"match": "(?<!\\$)\\b(ref|const)\\b(?!\\$)",
-					"name": "storage.modifier.parasail"
-				},
-				{
-					"match": "(?<!\\$)\\b(?:void|bool|num|int|double|dynamic|var)\\b(?!\\$)",
-					"name": "storage.type.primitive.parasail"
-				}
-			]
-		},
-		"punctuation": {
-			"patterns": [
-				{
-					"match": ",",
-					"name": "punctuation.comma.parasail"
-				},
-				{
-					"match": ";",
-					"name": "punctuation.terminator.parasail"
-				},
-				{
-					"match": "\\.",
-					"name": "punctuation.dot.parasail"
-				}
-			]
-		},
-		"constants-and-special-vars": {
-			"patterns": [
-				{
-					"match": "(?<!\\$)\\b(true|false|null)\\b(?!\\$)",
-					"name": "constant.language.parasail"
-				},
-				{
-					"match": "(?<!\\$)\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b(?!\\$)",
-					"name": "constant.numeric.parasail"
-				},
-				{
-					"match": "(?<![a-zA-Z0-9_$])[_$]*[A-Z][a-zA-Z0-9_$]*",
-					"name": "support.class.parasail"
-				}
-			]
-		}
-	}
+    "fileTypes": [
+        "parasail"
+    ],
+    "foldingStartMarker": "\\{\\s*$",
+    "foldingStopMarker": "^\\s*\\}",
+    "name": "parasail",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#punctuation"
+        },
+        {
+            "include": "#constants-and-special-vars"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "captures": {
+                        "1": {
+                            "name": "comment.line.double-slash.parasail"
+                        }
+                    },
+                    "match": "((//).*)$"
+                },
+                {
+                    "name": "comment.line.parasail",
+                    "begin": "--",
+                    "end": "[\\n\\r]"
+                }
+            ]
+        },
+        "string-interp": {
+            "patterns": [
+                {
+                    "captures": {
+                        "2": {
+                            "name": "variable.parameter.parasail"
+                        },
+                        "3": {
+                            "name": "variable.parameter.parasail"
+                        }
+                    },
+                    "match": "\\$((\\w+)|\\{([^{}]+)\\})"
+                },
+                {
+                    "match": "\\\\.",
+                    "name": "constant.character.escape.parasail"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "begin": "(?<!r)\"\"\"",
+                    "end": "\"\"\"(?!\")",
+                    "name": "string.interpolated.triple.double.parasail",
+                    "patterns": [
+                        {
+                            "include": "#string-interp"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(?<!r)'''",
+                    "end": "'''(?!')",
+                    "name": "string.interpolated.triple.single.parasail",
+                    "patterns": [
+                        {
+                            "include": "#string-interp"
+                        }
+                    ]
+                },
+                {
+                    "begin": "r\"\"\"",
+                    "end": "\"\"\"(?!\")",
+                    "name": "string.quoted.triple.double.parasail"
+                },
+                {
+                    "begin": "r'''",
+                    "end": "'''(?!')",
+                    "name": "string.quoted.triple.single.parasail"
+                },
+                {
+                    "begin": "(?<!\\|r)\"",
+                    "end": "\"",
+                    "name": "string.interpolated.double.parasail",
+                    "patterns": [
+                        {
+                            "match": "\\n",
+                            "name": "invalid.string.newline"
+                        },
+                        {
+                            "include": "#string-interp"
+                        }
+                    ]
+                },
+                {
+                    "begin": "r\"",
+                    "end": "\"",
+                    "name": "string.quoted.double.parasail",
+                    "patterns": [
+                        {
+                            "match": "\\n",
+                            "name": "invalid.string.newline"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(?<!\\|r)'",
+                    "end": "'",
+                    "name": "string.interpolated.single.parasail",
+                    "patterns": [
+                        {
+                            "match": "\\n",
+                            "name": "invalid.string.newline"
+                        },
+                        {
+                            "include": "#string-interp"
+                        }
+                    ]
+                },
+                {
+                    "begin": "r'",
+                    "end": "'",
+                    "name": "string.quoted.single.parasail",
+                    "patterns": [
+                        {
+                            "match": "\\n",
+                            "name": "invalid.string.newline"
+                        }
+                    ]
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "match": "(?<!\\$)\\b(all|block|case|continue|each|else|elsif|exit|for|forward|if|loop|return|reverse|some|then|until|while|with)\\b(?!\\$)",
+                    "name": "keyword.control.parasail"
+                },
+                {
+                    "match": "(?<!\\$)\\b(abstract|class|concurrent|end|extends|exports|func|global|implements|import|interface|lambda|locked|new|of|op|optional|private|queued|separate|type|var)\\b(?!\\$)",
+                    "name": "keyword.declaration.parasail"
+                },
+                {
+                    "match": "(==|!=|<=?|>=?)",
+                    "name": "keyword.operator.comparison.parasail"
+                },
+                {
+                    "match": "(([+*/%-]|\\~)=)",
+                    "name": "keyword.operator.assignment.arithmetic.parasail"
+                },
+                {
+                    "match": "(<=>|<==|==>|:=|<=|>=|<\\|=|\\|=|==)",
+                    "name": "keyword.operator.assignment.parasail"
+                },
+                {
+                    "match": "(\\-\\-|\\+\\+)",
+                    "name": "keyword.operator.increment-decrement.parasail"
+                },
+                {
+                    "match": "(\\-|\\+|\\*|\\/|\\~\\/|%)",
+                    "name": "keyword.operator.arithmetic.parasail"
+                },
+                {
+                    "match": "(!|&&|\\|\\|)",
+                    "name": "keyword.operator.logical.parasail"
+                },
+                {
+                    "match": "(?<!\\$)\\b(ref|const)\\b(?!\\$)",
+                    "name": "storage.modifier.parasail"
+                },
+                {
+                    "match": "(?<!\\$)\\b(?:void|bool|num|int|double|dynamic|var)\\b(?!\\$)",
+                    "name": "storage.type.primitive.parasail"
+                }
+            ]
+        },
+        "punctuation": {
+            "patterns": [
+                {
+                    "match": ",",
+                    "name": "punctuation.comma.parasail"
+                },
+                {
+                    "match": ";",
+                    "name": "punctuation.terminator.parasail"
+                },
+                {
+                    "match": "\\.",
+                    "name": "punctuation.dot.parasail"
+                }
+            ]
+        },
+        "constants-and-special-vars": {
+            "patterns": [
+                {
+                    "match": "(?<!\\$)\\b(true|false|null)\\b(?!\\$)",
+                    "name": "constant.language.parasail"
+                },
+                {
+                    "match": "(?<!\\$)\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b(?!\\$)",
+                    "name": "constant.numeric.parasail"
+                },
+                {
+                    "match": "(?<![a-zA-Z0-9_$])[_$]*[A-Z][a-zA-Z0-9_$]*",
+                    "name": "support.class.parasail"
+                },
+                {
+                    "match": "([_$]*[a-z][a-zA-Z0-9_$]*)(<|\\(|\\s+=>)",
+                    "captures": {
+                        "1": {
+                            "name": "entity.name.function.parasail"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "scopeName": "source.parasail"
 }
