@@ -3,7 +3,7 @@
 	"displayName": "%displayName%",
 	"description": "%description%",
 	"icon": "logo_parasail.png",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"publisher": "ohenley",
 	"author": "ohenley",
 	"engines": { "vscode": "*" },
